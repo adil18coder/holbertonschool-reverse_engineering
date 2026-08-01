@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function display_elf_header_info() {
-    echo "Header Information for '$file_name':"
+    echo "ELF Header Information for '$file_name':"
     echo "----------------------------------------"
     echo "Magic Number: $magic_number"
     echo "Class: $class"
