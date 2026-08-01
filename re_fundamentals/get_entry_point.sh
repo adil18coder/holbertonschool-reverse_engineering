@@ -24,10 +24,10 @@ if ! file "$file_name" | grep -q "ELF"; then
     exit 1
 fi
 
-# 4. Məlumatların çıxarılması və boşluqların təhlükəsiz təmizlənməsi (sed vasitəsilə)
+# 4. Məlumatların çıxarılması və təmizlənməsi
 magic_number=$(readelf -h "$file_name" | grep "Magic:" | sed 's/^[ \t]*Magic:[ \t]*//')
 class=$(readelf -h "$file_name" | grep "Class:" | awk -F: '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
-byte_order=$(readelf -h "$file_name" | grep "Data:" | awk -F: '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+byte_order=$(readelf -h "$file_name" | grep "Data:" | awk -F: '{print $2}' | awk -F, '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
 entry_point_address=$(readelf -h "$file_name" | grep "Entry point address:" | awk -F: '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
 
 # 5. Nəticəni ekrana çıxarırıq
